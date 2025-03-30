@@ -24,7 +24,7 @@
           <div className="feedbackForm">
             <button
               className="delButton"
-              onClick={() => onDelete(feeddback, id)}
+              onClick={() => onDelete(feeddback.id)}
             >
               Delete
             </button>
@@ -35,7 +35,7 @@
             <p className="feedbackCommnet">{feeddback.comment}</p>
             {feeddback.timeStamp && (
               <div className="feedbackTimeStamp">
-                {new Date(feeddback.timeStamp).tolocaleString()}
+                {new Date(feeddback.timeStamp).toLocaleString()}
               </div>
             )}
           </div>
@@ -46,18 +46,20 @@
           return <div className="loading">Loading feedback </div>;
         }
 
-        if (loading === 0) {
+        if (feeddbacks.length === 0) {
           return <div className="nofeed">NO feedback are given</div>;
         }
 
         return (
           <div className="feedbackList">
             {feeddbacks.map((feeddback) => {
-              <FeedbackItem
-                key={feeddback.id}
-                feeddback={feeddback}
-                onDelete={onDelete}
-              />;
+              return (
+                <FeedbackItem
+                  key={feeddback.id}
+                  feeddback={feeddback}
+                  onDelete={onDelete}
+                />
+              );
             })}
           </div>
         );
@@ -79,14 +81,14 @@
         };
         const validate = () => {
           const newErr = {};
-          if (formData.name.trim()) {
+          if (!formData.name.trim()) {
             newErr.name = "Name is Required PLease Enter YOur Name";
           }
-          if (formData.email.trim()) {
+          if (!formData.email.trim()) {
             newErr.email = "Email is Required PLease Enter YOur Email";
           }
 
-          if (formData.comment.trim()) {
+          if (!formData.comment.trim()) {
             newErr.comment = "Comment is Required PLease Enter YOur comment";
           }
           setErrors(newErr);
@@ -111,7 +113,7 @@
             <h2 className="formTitle">Submit Feedback Form</h2>
 
             <div className="fomrGroup">
-              <label for="name">Name</label>
+              <label htmlfor="name">Name</label>
               <input
                 type="text"
                 id="name"
@@ -124,7 +126,7 @@
             </div>
 
             <div className="fomrGroup">
-              <label for="name">Name</label>
+              <label htmlfor="name">Name</label>
               <input
                 type="email"
                 id="email"
@@ -137,7 +139,7 @@
             </div>
 
             <div className="fomrGroup">
-              <label for="name">Comment</label>
+              <label htmlfor="comment">Comment</label>
               <input
                 id="comment"
                 name="comment"
@@ -159,7 +161,7 @@
 
       function ToggleTheme({ theme, ThemeToggle }) {
         return (
-          <button className="themeToggle" onClick={ToggleTheme}>
+          <button className="themeToggle" onClick={toggleTheme}>
             {theme === "light" ? "dark mode" : "light mode"}
           </button>
         );
@@ -238,11 +240,11 @@
               <ThemeToggle theme={theme} Toggle Theme />
             </header>
             <main className="main-grid">
-              <FeedBackForm
+              <FeedbackForm
                 onSubmit={subMitfeedback}
                 successMessage={successMessage}
               />
-              <feedbackList
+              <FeedbackList
                 feeddbacks={feedbacks}
                 loading={loading}
                 onDelete={deleteFeedback}
