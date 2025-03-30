@@ -22,8 +22,7 @@
     <!-- <script src="./firebase.js"></script> -->
     <script type="text/babel">
       // Import the functions you need from the SDKs you need
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
+      const { initializeApp } = firebase;
 
       const firebaseConfig = {
         apiKey: "AIzaSyD_IrlYXHU4KdCY7LeRCmbKY7QylWu7-Jw",
@@ -37,7 +36,6 @@
 
       const app = initializeApp(firebaseConfig);
       const database = firebase.database(app);
-      const analytics = getAnalytics(app);
 
       function FeedBackForm({ feeddback, onDelete }) {
         return (
@@ -74,7 +72,7 @@
           <div className="feedbackList">
             {feeddbacks.map((feeddback) => {
               return (
-                <FeedbackItem
+                <FeedBackForm
                   key={feeddback.id}
                   feeddback={feeddback}
                   onDelete={onDelete}
@@ -179,9 +177,9 @@
         );
       }
 
-      function ToggleTheme({ theme, ThemeToggle }) {
+      function ToggleTheme({ theme, toggleTheme }) {
         return (
-          <button className="themeToggle" onClick={ToggleTheme}>
+          <button className="themeToggle" onClick={toggleTheme}>
             {theme === "light" ? "dark mode" : "light mode"}
           </button>
         );
