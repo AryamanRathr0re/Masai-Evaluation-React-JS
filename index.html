@@ -19,6 +19,23 @@
     <div id="root">React Not rendered</div>
     <!-- <script src="./firebase.js"></script> -->
     <script type="text/babel">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyD_IrlYXHU4KdCY7LeRCmbKY7QylWu7-Jw",
+        authDomain: "feedback-form-react-bc793.firebaseapp.com",
+        projectId: "feedback-form-react-bc793",
+        storageBucket: "feedback-form-react-bc793.firebasestorage.app",
+        messagingSenderId: "250676620970",
+        appId: "1:250676620970:web:6ab4a5b1b77e42f1edaad3",
+        measurementId: "G-3Y0MLVCB7S",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+
       function FeedBackForm({ feeddback, onDelete }) {
         return (
           <div className="feedbackForm">
@@ -113,7 +130,7 @@
             <h2 className="formTitle">Submit Feedback Form</h2>
 
             <div className="fomrGroup">
-              <label htmlfor="name">Name</label>
+              <label htmlFor="name">Name</label>
               <input
                 type="text"
                 id="name"
@@ -126,7 +143,7 @@
             </div>
 
             <div className="fomrGroup">
-              <label htmlfor="name">Name</label>
+              <label htmlFor="name">Name</label>
               <input
                 type="email"
                 id="email"
@@ -139,7 +156,7 @@
             </div>
 
             <div className="fomrGroup">
-              <label htmlfor="comment">Comment</label>
+              <label htmlFor="comment">Comment</label>
               <input
                 id="comment"
                 name="comment"
@@ -161,7 +178,7 @@
 
       function ToggleTheme({ theme, ThemeToggle }) {
         return (
-          <button className="themeToggle" onClick={toggleTheme}>
+          <button className="themeToggle" onClick={ToggleTheme}>
             {theme === "light" ? "dark mode" : "light mode"}
           </button>
         );
@@ -237,14 +254,14 @@
           <div className="app-container">
             <header className="header">
               <h1 className="title">FeedBack Board</h1>
-              <ThemeToggle theme={theme} Toggle Theme />
+              <ToggleTheme theme={theme} Toggle Theme />
             </header>
             <main className="main-grid">
               <FeedbackForm
                 onSubmit={subMitfeedback}
                 successMessage={successMessage}
               />
-              <FeedbackList
+              <FeedBackList
                 feeddbacks={feedbacks}
                 loading={loading}
                 onDelete={deleteFeedback}
