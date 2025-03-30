@@ -12,6 +12,8 @@
       src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
     ></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-database.js"></script>
 
     <title>Document</title>
   </head>
@@ -19,10 +21,6 @@
     <div id="root">React Not rendered</div>
     <!-- <script src="./firebase.js"></script> -->
     <script type="text/babel">
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
-
       const firebaseConfig = {
         apiKey: "AIzaSyD_IrlYXHU4KdCY7LeRCmbKY7QylWu7-Jw",
         authDomain: "feedback-form-react-bc793.firebaseapp.com",
@@ -34,7 +32,7 @@
       };
 
       const app = initializeApp(firebaseConfig);
-      const analytics = getAnalytics(app);
+      const database = firebase.database(app);
 
       function FeedBackForm({ feeddback, onDelete }) {
         return (
@@ -176,9 +174,9 @@
         );
       }
 
-      function ToggleTheme({ theme, ThemeToggle }) {
+      function ToggleTheme({ theme, toggleTheme }) {
         return (
-          <button className="themeToggle" onClick={ToggleTheme}>
+          <button className="themeToggle" onClick={toggleTheme}>
             {theme === "light" ? "dark mode" : "light mode"}
           </button>
         );
